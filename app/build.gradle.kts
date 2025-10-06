@@ -31,7 +31,6 @@ android {
 
         // ✅ Define your BuildConfig field once using local.properties or fallback
         val key = localProps.getProperty("GEMINI_API_KEY") ?: "AIzaSyDUMMY-ExampleKey12345"
-        buildConfigField("String", "GEMINI_API_KEY", key)
     }
 
     buildTypes {
