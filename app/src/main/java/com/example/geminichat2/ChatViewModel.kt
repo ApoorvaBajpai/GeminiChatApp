@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import com.example.geminichat2.BuildConfig
+import com.google.ai.client.generativeai.Chat
 
 class ChatViewModel : ViewModel() {
     private val _messages = MutableStateFlow<List<ChatMessage>>(emptyList())
@@ -17,10 +18,11 @@ class ChatViewModel : ViewModel() {
 
     // Use API key from BuildConfig
     private val generativeModel = GenerativeModel(
-        modelName = "gemini-pro",
+        modelName = "gemini-2.5-flash",
         apiKey = BuildConfig.GEMINI_API_KEY
     )
 
+    private val chat: Chat = generativeModel.startChat()
     fun sendMessage(userMessage: String) {
         if (userMessage.isBlank()) return
 
@@ -30,7 +32,7 @@ class ChatViewModel : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val response = generativeModel.generateContent(userMessage)
+                val response = chat.sendMessage(userMessage)
                 val botMessage = response.text ?: "No response"
 
                 // Add bot response

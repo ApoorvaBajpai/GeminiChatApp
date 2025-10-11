@@ -13,7 +13,7 @@ val localProps = Properties().apply {
     if (f.exists()) FileInputStream(f).use { load(it) }
 }
 
-val GEMINI_API_KEY: String? = localProps.getProperty("GEMINI_API_KEY")
+// val GEMINI_API_KEY: String? = localProps.getProperty("GEMINI_API_KEY")
 
 android {
     namespace = "com.example.geminichat2"
@@ -29,8 +29,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        // ✅ Define your BuildConfig field once using local.properties or fallback
-        val key = localProps.getProperty("GEMINI_API_KEY") ?: "AIzaSyDUMMY-ExampleKey12345"
+        val geminiApiKey = localProps.getProperty("GEMINI_API_KEY") ?: "YOUR_API_KEY"
+        buildConfigField("String", "GEMINI_API_KEY", "\"$geminiApiKey\"")
     }
 
     buildTypes {
@@ -88,5 +88,14 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
+    testImplementation("org.mockito:mockito-core:5.1.1")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("io.mockk:mockk:1.13.5")
+
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    androidTestImplementation("androidx.test:runner:1.5.2")
+    androidTestImplementation("androidx.test:rules:1.5.0")
 
 }
