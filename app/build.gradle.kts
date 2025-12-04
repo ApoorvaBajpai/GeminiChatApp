@@ -85,6 +85,9 @@ dependencies {
     implementation("com.google.ai.client.generativeai:generativeai:0.1.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation("org.reactivestreams:reactive-streams:1.0.4")
+    
+    // Material Icons Extended for theme toggle icons (use BOM version)
+    implementation("androidx.compose.material:material-icons-extended")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
 
